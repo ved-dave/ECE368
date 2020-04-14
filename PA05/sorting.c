@@ -75,7 +75,7 @@ static int partition(long * arr, int lb, int ub)
     return indUp;
 }
 
-//merge mergesort_recursion 
+//merge sort
 void Merge_Sort(long *Array, int Size)
 {
     if (Array != NULL)
@@ -89,7 +89,7 @@ void Merge_Sort(long *Array, int Size)
     }
     return;
 }
-
+// recursive function for merge sort
 static void mergesort_recursion(long * arr, long * tempArr, int lb, int ub, bool sortUp)
 {
     if (lb < ub)
@@ -100,7 +100,7 @@ static void mergesort_recursion(long * arr, long * tempArr, int lb, int ub, bool
         merge(arr, tempArr, lb, ub, sortUp);
     }
 }
-
+// merge function
 static void merge (long * arr, long * tempArr, int lb, int ub, bool mergeUp)
 {
     int indUp = lb;
