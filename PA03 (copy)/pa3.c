@@ -10,15 +10,13 @@ Tree * buildTree(FILE * input, int numLn)
     fseek(input, 0, SEEK_SET); // reset fptr
 	
     // reverse input file
-    char **reversePo;
-    reversePo = malloc(sizeof(char*)*numLn);
+    // char **reversePo;
+    Stack * reversePo = createStack();
     for(int i = 0; i < numLn; i++)
     {
-        reversePo[i] = malloc(sizeof(char)*15);
-    }
-    for(int i = 0; i < numLn; i++)
-    {
-        fgets(reversePo[i], 15, input);
+        char * inputStr = malloc(sizeof(char)*15);
+        fgets(inputStr, 15, input);
+        push(reversePo, inputStr);
     }
 
     Tree * binaryTree = NULL;
@@ -33,8 +31,8 @@ Tree * buildTree(FILE * input, int numLn)
     return binaryTree;
 }
 
-// build tree using reversed postorder str array "reversePo"
-TreeNode * constructor(char ** reversePo, int * numLn) // FIX ME
+// build tree using reversed postorder stack "reversePo"
+TreeNode * constructor(Stack * reversePo, int * numLn) // FIX ME
 {
     if (*numLn < 0)
     {
@@ -45,28 +43,32 @@ TreeNode * constructor(char ** reversePo, int * numLn) // FIX ME
     tn -> left = NULL;
     tn -> right = NULL;
     tn -> block = malloc(sizeof(Block));
-    if (isdigit(reversePo[*numLn-1][0]) > 0)
+
+
+    char * temp = pop(reversePo);
+
+    if (isdigit(temp[0]) > 0)
     {
-        char * token = strtok(reversePo[*numLn-1], "(");
-        (tn -> block) -> label = atoi(reversePo[*numLn-1]);
+        char * token = strtok(temp, "(");
+        (tn -> block) -> label = atoi(temp);
         token = strtok(NULL, ",");
         (tn -> block) -> dims[0] = atoi(token);
         token = strtok(NULL, ")");
         (tn -> block) -> dims[1] = atoi(token);
         (tn -> block) -> coords[0] = 0;
         (tn -> block) -> coords[1] = 0;
-        free(reversePo[*numLn - 1]);
+        free(temp);
     }
-    else if(reversePo[*numLn-1][0] == 'V')
+    else if(temp[0] == 'V')
     {
         (tn -> block) -> label = -1;
         (tn -> block) -> dims[0] = 0;
         (tn -> block) -> dims[1] = 0;
         (tn -> block) -> coords[0] = 0;
         (tn -> block) -> coords[1] = 0;
-        free(reversePo[*numLn - 1]);
+        free(temp);
     }
-    else if(reversePo[*numLn-1][0] == 'H')
+    else if(temp[0] == 'H')
     {
         //printf("asdkkma\n");
         (tn -> block) -> label = -2;
@@ -74,7 +76,7 @@ TreeNode * constructor(char ** reversePo, int * numLn) // FIX ME
         (tn -> block) -> dims[1] = 0;
         (tn -> block) -> coords[0] = 0;
         (tn -> block) -> coords[1] = 0;
-        free(reversePo[*numLn - 1]);
+        free(temp);
     }
     else
     {
