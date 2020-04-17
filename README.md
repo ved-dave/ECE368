@@ -1,5 +1,5 @@
 # ECE368
-Ece 368 PA's.  
+Ece 368 PA's - Purdue University spring 2020 with Koh.   
 PA01 - Shell sort implementation in both array and linked list.  
 PA02 - Huffman encoding algorithm.  
 PA03 - Box packing.  
