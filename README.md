@@ -5,3 +5,4 @@ PA02 - Huffman encoding algorithm.
 PA03 - Box packing.  
 PA04 - Balancing Binary Search Trees (AVL trees).  
 PA05 - Quicksort and merge sort implementations.  
+PA06 - Graphs.  
